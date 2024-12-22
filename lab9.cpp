@@ -1,20 +1,47 @@
-﻿// lab9.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//2 Программа конференции Хмельник Р.А.
+﻿#include <iostream>
 
-#include <iostream>
+using namespace std;
+
+#include "Data.h"
+#include "file_reader.h"
+#include "constants.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    setlocale(LC_ALL, "Russian");
+    cout << "Лабораторная работа №9. GIT\n";
+    cout << "Вариант №2. Программа конференций\n";
+    cout << "Автор: Руслан Хмельник\n\n";
+    Data* subscriptions[MAX_FILE_ROWS_COUNT];
+    int size;
+    try
+    {
+        read("data.txt", subscriptions, size);
+        for (int i = 0; i < size; i++)
+        {
+            cout << subscriptions[i]->reader.last_name << '\n';
+            cout << subscriptions[i]->reader.first_name << '\n';
+            cout << subscriptions[i]->reader.middle_name << '\n';
+            cout << subscriptions[i]->finish.day << ' ';
+            cout << subscriptions[i]->finish.month << ' ';
+            cout << subscriptions[i]->finish.year << '\n';
+            cout << subscriptions[i]->start.day << ' ';
+            cout << subscriptions[i]->start.month << ' ';
+            cout << subscriptions[i]->start.year << '\n';
+            cout << subscriptions[i]->author.last_name << '\n';
+            cout << subscriptions[i]->author.first_name << '\n';
+            cout << subscriptions[i]->author.middle_name << '\n';
+            cout << subscriptions[i]->title << '\n';
+            cout << '\n';
+        }
+        for (int i = 0; i < size; i++)
+        {
+            delete subscriptions[i];
+        }
+    }
+    catch (const char* error)
+    {
+        cout << error << '\n';
+    }
+    return 0;
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
